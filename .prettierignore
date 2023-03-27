@@ -1,5 +1,6 @@
-.cache
 package.json
 yarn.lock
 yarn-error.json
-public
+.next
+.netlify
+out

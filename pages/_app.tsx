@@ -2,6 +2,7 @@ import NextApp, { AppProps, AppContext } from 'next/app';
 import getConfig from 'next/config';
 import { MantineProvider } from '@mantine/core';
 import { getDirectusClient } from '../lib/directus';
+import { SettingsProvider } from '../context/settings';
 
 const {
   publicRuntimeConfig: { prefix },
@@ -10,9 +11,11 @@ const {
 export default function App(props: AppProps & { theme: any }) {
   const { Component, pageProps, theme } = props;
   return (
-    <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
-      <Component {...pageProps} />
-    </MantineProvider>
+    <SettingsProvider>
+      <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
+        <Component {...pageProps} />
+      </MantineProvider>
+    </SettingsProvider>
   );
 }
 
