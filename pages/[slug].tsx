@@ -42,7 +42,7 @@ export default function Page({ page }: PageProps) {
             return null;
           }
           const BlockComponent = components[component];
-          return <BlockComponent key={id} block={item} title={title} slug={page.slug} id={id} />;
+          return <BlockComponent key={id} block={item} title={title} slug={page.slug} />;
         })}
       </Container>
     </Layout>
@@ -59,7 +59,6 @@ export async function getStaticProps({ params }: ParamsProps) {
       'blocks.collection',
       'blocks.item.*',
       `blocks.item.fields.${prefix}form_fields_id.*`,
-      `blocks.item.integrations.${prefix}form_integrations_id.*`,
       'blocks.item.on_success_redirect.slug',
     ],
     filter: { slug: { _eq: slug } },

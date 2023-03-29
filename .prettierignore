@@ -4,3 +4,4 @@ yarn-error.json
 .next
 .netlify
 out
+.history

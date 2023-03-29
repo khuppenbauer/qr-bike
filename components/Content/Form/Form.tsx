@@ -21,6 +21,7 @@ interface Field {
 
 interface FormProps {
   block: {
+    id: string;
     name: string;
     fields: Field[];
     submit: string;
@@ -39,8 +40,9 @@ interface FormData {
   [key: string]: string | string[];
 }
 
-function FormComponent({ block, slug, id }: FormProps) {
+function FormComponent({ block, slug }: FormProps) {
   const {
+    id,
     name: formName,
     fields,
     submit,
@@ -68,7 +70,7 @@ function FormComponent({ block, slug, id }: FormProps) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ formId: id, name: formName, slug, ...values }),
+      body: JSON.stringify({ formId: id, formName, slug, ...values }),
     })
       .then(() => {
         setData(values);
