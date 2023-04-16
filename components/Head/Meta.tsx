@@ -7,7 +7,7 @@ const {
 } = getConfig();
 
 interface MetaProps {
-  title: string;
+  title?: string;
   seo?: {
     seoTitle?: string;
     seoDescription?: string;
@@ -27,6 +27,7 @@ function MetaComponent({ title, seo }: MetaProps) {
   const settingsDescription = meta?.description || '';
   const author = meta?.author;
 
+  const icon = meta?.icon?.id;
   if (settingsTitle) {
     pageTitle = `${settingsTitle} - ${pageTitle}`;
   }
@@ -55,6 +56,22 @@ function MetaComponent({ title, seo }: MetaProps) {
       {metaDescription && <meta name="twitter:description" content={metaDescription} />}
       {imageHandle && <meta property="twitter:image" content={imageHandle} />}
       {metaAuthor && <meta name="twitter:author" content={metaAuthor} />}
+      {icon && (
+        <>
+          <link
+            rel="icon"
+            type={meta?.icon?.type}
+            sizes="16x16"
+            href={`${url}/assets/${icon}?width=16`}
+          />
+          <link
+            rel="icon"
+            type={meta?.icon?.type}
+            sizes="32x32"
+            href={`${url}/assets/${icon}?width=32`}
+          />
+        </>
+      )}
     </Head>
   );
 }

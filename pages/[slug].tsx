@@ -3,7 +3,9 @@ import Layout from '../components/Layout/Layout';
 import Container from '../components/Container/Container';
 import Forms from '../components/Content/Form/Form';
 import Header from '../components/Content/Header/Header';
+import Manifest from '../components/Head/Manifest';
 import Meta from '../components/Head/Meta';
+import { useSettingsContext } from '../context/settings';
 import { getDirectusClient } from '../lib/directus';
 import PageType from '../interfaces/page';
 
@@ -29,8 +31,10 @@ export default function Page({ page }: PageProps) {
   const title = page.title || '';
   const description = page.description || '';
   const { seoTitle, seoDescription, keywords, image, noIndex } = page;
+  const { pwa } = useSettingsContext();
   return (
     <Layout>
+      {pwa && <Manifest />}
       <Meta title={title} seo={{ seoTitle, seoDescription, keywords, image, noIndex }} />
       <Container>
         <Header headline={title} description={description} />

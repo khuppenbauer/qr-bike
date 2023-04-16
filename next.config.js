@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const { Directus } = require('@directus/sdk');
 
-const nextConfig = {
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'production' ? false : true,
+})
+
+module.exports = withPWA({
   reactStrictMode: true,
   publicRuntimeConfig: {
     url: process.env.DIRECTUS_URL,
@@ -19,17 +26,18 @@ const nextConfig = {
     ],
   },
   async redirects() {
-    const redirect = process.env.DIRECTUS_REDIRECT;
-    if (!redirect) {
-      return [];
+    const redirect = [];
+    const redirectEnabled = process.env.DIRECTUS_REDIRECT;
+    if (redirectEnabled === true) {
+      const directus = new Directus(process.env.DIRECTUS_URL);
+      await directus.auth.static(process.env.DIRECTUS_TOKEN);
+      const { data } = await directus.items('redirects').readByQuery({
+        fields: ['source', 'destination', 'permanent'],
+      });
+      data.forEach((item) => {
+        redirect.push(item);
+      })
     }
-    const directus = new Directus(process.env.DIRECTUS_URL);
-    await directus.auth.static(process.env.DIRECTUS_TOKEN);
-    const { data } = await directus.items('redirects').readByQuery({
-      fields: ['source', 'destination', 'permanent'],
-    });
-    return data;
-  },
-}
-
-module.exports = nextConfig
+    return redirect;
+  }
+})

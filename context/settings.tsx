@@ -27,14 +27,21 @@ interface SettingsProps {
   author?: string;
   title?: string;
   description?: string;
-  icon?: string;
+  icon?: AssetType;
   domain?: string;
+  pwa?: boolean;
+  theme_color?: string;
 }
 
 interface StateProps {
   meta?: MetaType;
   header?: HeaderType;
   footer?: FooterType;
+  pwa?: boolean;
+  manifest?: {
+    icon?: AssetType;
+    theme_color?: string;
+  };
 }
 
 interface SettingsProviderProps {
@@ -61,6 +68,8 @@ const loadSettings = async (): Promise<SettingsProps> => {
   const { data } = await directus.items(`${prefix}settings`).readByQuery({
     fields: [
       '*',
+      'icon.id',
+      'icon.type',
       'headerLogo.id',
       'headerLogo.title',
       'footerLogo.id',
@@ -75,7 +84,6 @@ const loadSettings = async (): Promise<SettingsProps> => {
       `mainMenu.${prefix}pages_id.slug`,
     ],
   });
-
   let { mainMenu, footerLinks }: any = data;
   if (mainMenu) {
     mainMenu = parse(mainMenu);
@@ -111,6 +119,8 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
     footerLinks,
     footerText,
     socialMedia,
+    pwa,
+    theme_color,
   } = settings;
 
   const state = {
@@ -131,6 +141,11 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
       text: footerText,
       author,
       socialMedia,
+    },
+    pwa,
+    manifest: {
+      icon,
+      theme_color,
     },
   };
   return <SettingsContext.Provider value={state}>{children}</SettingsContext.Provider>;
