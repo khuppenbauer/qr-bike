@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useContext, useState, useEffect } from 'react';
 import getConfig from 'next/config';
 import { getDirectusClient } from '../lib/directus';
+import { parse } from '../lib/helpers';
 import LinksType from '../interfaces/links';
 import MetaType from '../interfaces/meta';
 import HeaderType from '../interfaces/header';
@@ -49,19 +50,6 @@ interface SettingsProviderProps {
 }
 
 const SettingsContext = createContext<StateProps>({});
-
-const parse = (data: any[]) => {
-  return data.map((item) => {
-    const itemData: any = Object.values(item)[0];
-    Object.values(itemData).forEach((itemValue, itemKey) => {
-      if (Array.isArray(itemValue)) {
-        const property = Object.keys(itemData)[itemKey];
-        itemData[property] = parse(itemValue);
-      }
-    });
-    return itemData as SettingsProps;
-  });
-};
 
 const loadSettings = async (): Promise<SettingsProps> => {
   const directus = await getDirectusClient();
