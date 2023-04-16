@@ -2,6 +2,7 @@ import type Block from './block';
 
 type PageType = {
   title?: string;
+  headline?: string;
   description?: string;
   slug: string;
   seoTitle: string;
