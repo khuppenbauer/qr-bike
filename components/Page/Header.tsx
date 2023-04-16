@@ -4,6 +4,7 @@ import {
   Header,
   Container,
   Group,
+  Image,
   Burger,
   Paper,
   Transition,
@@ -11,7 +12,6 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import getConfig from 'next/config';
-import Image from 'next/image';
 import { useSettingsContext } from '../../context/settings';
 import Link from '../Link/Link';
 
@@ -125,7 +125,12 @@ function PageHeader() {
       <Container className={classes.header}>
         {logo && (
           <Link key="home" as="/" href="/">
-            <Image src={`${url}/assets/${logo.id}`} width={200} height={40} alt={logo.title} />
+            <Image
+              src={`${url}/assets/${logo.id}?height=40&quality=80`}
+              width={200}
+              height={40}
+              alt={logo.title}
+            />
           </Link>
         )}
         {items && (

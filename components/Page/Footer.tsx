@@ -1,8 +1,7 @@
 import React from 'react';
-import { createStyles, Container, Group, Text, ActionIcon, rem } from '@mantine/core';
+import { createStyles, Container, Group, Image, Text, ActionIcon, rem } from '@mantine/core';
 import SVG from 'react-inlinesvg';
 import getConfig from 'next/config';
-import Image from 'next/image';
 import { useSettingsContext } from '../../context/settings';
 import Link from '../Link/Link';
 
@@ -198,7 +197,12 @@ function PageFooter() {
         <Container className={classes.inner}>
           <div className={classes.logo}>
             {logo && (
-              <Image src={`${url}/assets/${logo.id}`} width={200} height={40} alt={logo.title} />
+              <Image
+                src={`${url}/assets/${logo.id}?height=40&quality=80`}
+                width={200}
+                height={40}
+                alt={logo.title}
+              />
             )}
             {text && (
               <Text size="xs" color="dimmed" className={classes.description}>
