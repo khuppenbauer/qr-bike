@@ -1,7 +1,9 @@
+import type Item from './item';
+
 type BlockType = {
   id: string;
   collection: string;
-  item: [];
+  item: Item[];
 };
 
 export default BlockType;

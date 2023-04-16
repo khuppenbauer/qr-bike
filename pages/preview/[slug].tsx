@@ -56,6 +56,7 @@ export async function getServerSideProps({ params }: ParamsProps) {
       'blocks.id',
       'blocks.collection',
       'blocks.item.*',
+      `blocks.item.links.${prefix}links_id.*`,
       `blocks.item.fields.${prefix}form_fields_id.*`,
       'blocks.item.on_success_redirect.slug',
     ],

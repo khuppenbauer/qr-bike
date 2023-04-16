@@ -1,6 +1,7 @@
 import React from 'react';
 import getConfig from 'next/config';
 import Forms from '../Form/Form';
+import Sections from '../Sections/Sections';
 import BlockType from '../../../interfaces/block';
 
 const {
@@ -15,6 +16,7 @@ interface ItemsProps {
 
 const components: { [index: string]: any } = {
   Forms,
+  Sections,
 };
 
 function BlocksComponent({ items, title, slug }: ItemsProps) {

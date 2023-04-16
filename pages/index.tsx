@@ -39,6 +39,7 @@ export async function getStaticProps() {
       'root.blocks.id',
       'root.blocks.collection',
       'root.blocks.item.*',
+      `root.blocks.item.links.${prefix}links_id.*`,
       `root.blocks.item.fields.${prefix}form_fields_id.*`,
       'root.blocks.item.on_success_redirect.slug',
     ],
