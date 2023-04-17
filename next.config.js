@@ -28,7 +28,7 @@ module.exports = withPWA({
   async redirects() {
     const redirect = [];
     const redirectEnabled = process.env.DIRECTUS_REDIRECT;
-    if (redirectEnabled === true) {
+    if (redirectEnabled === 'true') {
       const directus = new Directus(process.env.DIRECTUS_URL);
       await directus.auth.static(process.env.DIRECTUS_TOKEN);
       const { data } = await directus.items('redirects').readByQuery({
