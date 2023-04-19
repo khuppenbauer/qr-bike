@@ -6,12 +6,11 @@ import {
   Image,
   Container,
   Title,
-  Button,
   Group,
   Text,
   rem,
 } from '@mantine/core';
-import Link from '../../Link/Link';
+import Button from '../Link/Button';
 import ItemType from '../../../interfaces/item';
 
 interface BlockProps {
@@ -86,21 +85,15 @@ function TextImageLeftComponent({ block }: BlockProps) {
             {text && <Text color="dimmed" mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
             {links && (
               <Group mt={30}>
-                {links.map((link) => {
-                  const { type, label, url: linkUrl, page } = link;
-                  const href = type === 'internal' ? '/[slug]' : linkUrl;
-                  const as = type === 'internal' ? `/${page?.slug}` : linkUrl;
-                  if (!as || !href) {
-                    return null;
-                  }
-                  return (
-                    <Link key={label} as={as} href={href}>
-                      <Button size="md" className={classes.control}>
-                        {label}
-                      </Button>
-                    </Link>
-                  );
-                })}
+                {links.map((link) => (
+                  <Button
+                    key={link.id}
+                    link={link}
+                    size="md"
+                    variant="filled"
+                    className={classes.control}
+                  />
+                ))}
               </Group>
             )}
           </div>

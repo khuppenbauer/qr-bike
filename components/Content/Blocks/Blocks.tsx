@@ -1,7 +1,7 @@
 import React from 'react';
 import getConfig from 'next/config';
 import Forms from '../Form/Form';
-import Sections from '../Sections/Sections';
+import Sections from '../Section/Section';
 import Grids from '../Grid/Grid';
 import BlockType from '../../../interfaces/block';
 

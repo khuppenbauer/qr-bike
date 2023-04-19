@@ -17,15 +17,15 @@ const components: { [index: string]: any } = {
 };
 
 function SectionsComponent({ block }: any) {
-  const { type: contentType, layout, image } = block;
+  const { type, layout, image } = block;
   const links = parse(block.links);
   const blockItem = {
     ...block,
     links,
   };
-  let component = `${contentType}_${layout}`;
-  if (contentType === 'hero' && image) {
-    component = `${contentType}_${layout}_image`;
+  let component = `${type}_${layout}`;
+  if (type === 'hero' && image) {
+    component = `${type}_${layout}_image`;
   }
   if (!components[component]) {
     return null;

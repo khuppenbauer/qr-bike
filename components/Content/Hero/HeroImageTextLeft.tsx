@@ -1,7 +1,7 @@
 import React from 'react';
 import getConfig from 'next/config';
-import { createStyles, Container, Title, Text, Button, Group, rem } from '@mantine/core';
-import Link from '../../Link/Link';
+import { createStyles, Container, Title, Text, Group, rem } from '@mantine/core';
+import Button from '../Link/Button';
 import ItemType from '../../../interfaces/item';
 
 interface BlockProps {
@@ -110,21 +110,15 @@ function HeroImageTextLeftComponent({ block }: BlockProps) {
             )}
             {links && (
               <Group className={classes.controls}>
-                {links.map((link) => {
-                  const { type, label, url: linkUrl, page } = link;
-                  const href = type === 'internal' ? '/[slug]' : linkUrl;
-                  const as = type === 'internal' ? `/${page?.slug}` : linkUrl;
-                  if (!as || !href) {
-                    return null;
-                  }
-                  return (
-                    <Link key={label} as={as} href={href}>
-                      <Button size="xl" className={classes.control} variant="white">
-                        {label}
-                      </Button>
-                    </Link>
-                  );
-                })}
+                {links.map((link) => (
+                  <Button
+                    key={link.id}
+                    link={link}
+                    size="xl"
+                    variant="white"
+                    className={classes.control}
+                  />
+                ))}
               </Group>
             )}
           </div>

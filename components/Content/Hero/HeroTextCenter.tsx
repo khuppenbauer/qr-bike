@@ -1,6 +1,6 @@
 import React from 'react';
-import { createStyles, Title, Text, Button, Container, rem } from '@mantine/core';
-import Link from '../../Link/Link';
+import { createStyles, Title, Text, Container, rem } from '@mantine/core';
+import Button from '../Link/Button';
 import ItemType from '../../../interfaces/item';
 
 interface BlockProps {
@@ -91,21 +91,15 @@ function HeroTextCenterComponent({ block }: BlockProps) {
         )}
         {links && (
           <div className={classes.controls}>
-            {links.map((link) => {
-              const { type, label, url: linkUrl, page } = link;
-              const href = type === 'internal' ? '/[slug]' : linkUrl;
-              const as = type === 'internal' ? `/${page?.slug}` : linkUrl;
-              if (!as || !href) {
-                return null;
-              }
-              return (
-                <Link key={label} as={as} href={href}>
-                  <Button className={classes.control} size="lg">
-                    {label}
-                  </Button>
-                </Link>
-              );
-            })}
+            {links.map((link) => (
+              <Button
+                key={link.id}
+                link={link}
+                size="lg"
+                variant="filled"
+                className={classes.control}
+              />
+            ))}
           </div>
         )}
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import getConfig from 'next/config';
-import { Title, Text, Container, Button, Overlay, createStyles, rem } from '@mantine/core';
-import Link from '../../Link/Link';
+import { Title, Text, Container, Overlay, createStyles, rem } from '@mantine/core';
+import Button from '../Link/Button';
 import ItemType from '../../../interfaces/item';
 
 interface BlockProps {
@@ -80,7 +80,6 @@ const useStyles = createStyles((theme) => ({
       marginLeft: 0,
     },
   },
-
 }));
 
 function HeroImageTextCenterComponent({ block }: BlockProps) {
@@ -104,21 +103,15 @@ function HeroImageTextCenterComponent({ block }: BlockProps) {
         )}
         {links && (
           <div className={classes.controls}>
-            {links.map((link) => {
-              const { type, label, url: linkUrl, page } = link;
-              const href = type === 'internal' ? '/[slug]' : linkUrl;
-              const as = type === 'internal' ? `/${page?.slug}` : linkUrl;
-              if (!as || !href) {
-                return null;
-              }
-              return (
-                <Link key={label} as={as} href={href}>
-                  <Button size="lg" className={classes.control} variant="white">
-                    {label}
-                  </Button>
-                </Link>
-              );
-            })}
+            {links.map((link) => (
+              <Button
+                key={link.id}
+                link={link}
+                size="lg"
+                variant="white"
+                className={classes.control}
+              />
+            ))}
           </div>
         )}
       </div>
