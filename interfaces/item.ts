@@ -1,6 +1,7 @@
 import type Link from './link';
 
 type ItemType = {
+  id: string;
   type?: string;
   layout?: string;
   title?: string;

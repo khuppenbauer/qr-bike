@@ -1,4 +1,5 @@
 type LinkType = {
+  id: string;
   label: string;
   type: string;
   url?: string;
