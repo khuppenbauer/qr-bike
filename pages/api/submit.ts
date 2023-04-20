@@ -106,6 +106,18 @@ const sendWebhook = async (formIntegrationWebhook: string, data: any) => {
 
 const saveSubmission = async (data: any) => {
   const directus = await getDirectusClient();
+  const { formName } = data;
+
+  const submission = {
+    formName,
+    formSubmissionDate: new Date(),
+    formData: JSON.stringify(data, null, 2),
+  };
+  await directus.items(`${prefix}form_submissions`).createOne(submission);
+};
+
+const saveSubmissionWithUser = async (data: any) => {
+  const directus = await getDirectusClient();
   const { formName, name, email, slug } = data;
 
   const { data: user }: any = await directus.items(`${prefix}users`).readByQuery({
@@ -142,7 +154,6 @@ const saveSubmission = async (data: any) => {
 const createSubmission = async (data: any) => {
   const { formId } = data;
   const integrations = await getForm(formId);
-  await saveSubmission(data);
   await integrations.reduce(async (lastPromise: any, integration: IntegrationProps) => {
     const accum = await lastPromise;
     const { type, email, url } = integration;
@@ -156,6 +167,12 @@ const createSubmission = async (data: any) => {
         if (url) {
           await sendWebhook(url, data);
         }
+        break;
+      case 'save':
+        await saveSubmission(data);
+        break;
+      case 'saveUser':
+        await saveSubmissionWithUser(data);
         break;
     }
     return [...accum, {}];
