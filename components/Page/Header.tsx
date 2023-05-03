@@ -127,7 +127,6 @@ function PageHeader() {
           <Link key="home" as="/" href="/">
             <Image
               src={`${url}/assets/${logo.id}?height=40&quality=80`}
-              width={200}
               height={40}
               alt={logo.title}
             />

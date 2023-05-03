@@ -198,9 +198,7 @@ function PageFooter() {
           <div className={classes.logo}>
             {logo && (
               <Image
-                src={`${url}/assets/${logo.id}?height=40&quality=80`}
-                width={200}
-                height={40}
+                src={`${url}/assets/${logo.id}?height=100&width=200&fit=inside&quality=80`}
                 alt={logo.title}
               />
             )}
