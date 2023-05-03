@@ -53,6 +53,7 @@ function FormComponent({ block, slug }: FormProps) {
   } = block;
   const formFields = fields.map((item) => Object.values(item)[0]) as Field[];
   const [data, setData] = useState<FormData | null>(null);
+  const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const {
     handleSubmit,
@@ -64,6 +65,7 @@ function FormComponent({ block, slug }: FormProps) {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormData> = (values) => {
+    setDisabled(true);
     const url = '/api/submit';
     fetch(url, {
       method: 'POST',
@@ -78,10 +80,12 @@ function FormComponent({ block, slug }: FormProps) {
         if (on_success === 'redirect' && on_success_redirect.slug) {
           router.push(`/${on_success_redirect.slug}`);
         }
+        setDisabled(false);
       })
       .catch((error) => {
         setErrorMessage(error.message);
         reset();
+        setDisabled(false);
       });
   };
   return (
@@ -169,7 +173,7 @@ function FormComponent({ block, slug }: FormProps) {
             }
           })}
           <Group position="right" mt="md">
-            <ButtonComponent>{submit}</ButtonComponent>
+            <ButtonComponent disabled={disabled}>{submit}</ButtonComponent>
           </Group>
         </form>
       )}
