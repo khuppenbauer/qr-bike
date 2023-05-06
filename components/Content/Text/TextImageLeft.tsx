@@ -76,30 +76,28 @@ function TextImageLeftComponent({ block }: BlockProps) {
     : {};
 
   return (
-    <div>
-      <Container>
-        <div className={classes.inner}>
-          {image && <Image src={imgSrc} className={classes.image} />}
-          <div className={classes.content} style={contentStyle}>
-            {title && <Title className={classes.title}>{title}</Title>}
-            {text && <Text color="dimmed" mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
-            {links && (
-              <Group mt={30}>
-                {links.map((link) => (
-                  <Button
-                    key={link.id}
-                    link={link}
-                    size="md"
-                    variant="filled"
-                    className={classes.control}
-                  />
-                ))}
-              </Group>
-            )}
-          </div>
+    <Container>
+      <div className={classes.inner}>
+        {image && <Image src={imgSrc} className={classes.image} />}
+        <div className={classes.content} style={contentStyle}>
+          {title && <Title className={classes.title}>{title}</Title>}
+          {text && <Text color="dimmed" mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
+          {links && (
+            <Group mt={30}>
+              {links.map((link) => (
+                <Button
+                  key={link.id}
+                  link={link}
+                  size="md"
+                  variant="filled"
+                  className={classes.control}
+                />
+              ))}
+            </Group>
+          )}
         </div>
-      </Container>
-    </div>
+      </div>
+    </Container>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Group, Box, TypographyStylesProvider, Text } from '@mantine/core';
+import { Container, Group, Box, TypographyStylesProvider, Text } from '@mantine/core';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import TextInputComponent from './TextInput';
 import TextareaComponent from './Textarea';
@@ -89,95 +89,97 @@ function FormComponent({ block, slug }: FormProps) {
       });
   };
   return (
-    <Box sx={{ maxWidth: 300 }} mx="auto">
-      {errorMessage && (
-        <>
+    <Container>
+      <Box sx={{ maxWidth: 300 }}>
+        {errorMessage && (
+          <>
+            <TypographyStylesProvider>
+              <Text dangerouslySetInnerHTML={{ __html: on_error }} />
+            </TypographyStylesProvider>
+            {errorMessage}
+          </>
+        )}
+        {data ? (
           <TypographyStylesProvider>
-            <Text dangerouslySetInnerHTML={{ __html: on_error }} />
+            <Text dangerouslySetInnerHTML={{ __html: on_success_message }} />
           </TypographyStylesProvider>
-          {errorMessage}
-        </>
-      )}
-      {data ? (
-        <TypographyStylesProvider>
-          <Text dangerouslySetInnerHTML={{ __html: on_success_message }} />
-        </TypographyStylesProvider>
-      ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {formFields.map((field) => {
-            const {
-              id: fieldId,
-              name: formFieldName,
-              label: formFieldLabel,
-              placeholder: formFieldPlaceholder,
-              required: formFieldMandatory,
-              type: formFieldType,
-              choices: formFieldSelect,
-            } = field;
-            const fieldError = !!errors[formFieldName];
-            switch (formFieldType) {
-              case 'input':
-              case 'phone':
-              case 'email':
-                return (
-                  <TextInputComponent
-                    key={fieldId}
-                    name={formFieldName}
-                    label={formFieldLabel}
-                    placeholder={formFieldPlaceholder}
-                    type={formFieldType}
-                    withAsterisk={formFieldMandatory}
-                    error={fieldError}
-                    register={register}
-                  />
-                );
-              case 'checkbox':
-                return (
-                  <CheckboxComponent
-                    key={fieldId}
-                    name={formFieldName}
-                    label={formFieldLabel}
-                    withAsterisk={formFieldMandatory}
-                    error={fieldError}
-                    register={register}
-                  />
-                );
-              case 'textarea':
-                return (
-                  <TextareaComponent
-                    key={fieldId}
-                    name={formFieldName}
-                    label={formFieldLabel}
-                    placeholder={formFieldPlaceholder}
-                    withAsterisk={formFieldMandatory}
-                    error={fieldError}
-                    register={register}
-                  />
-                );
-              case 'select':
-                return (
-                  <SelectComponent
-                    key={fieldId}
-                    name={formFieldName}
-                    label={formFieldLabel}
-                    placeholder={formFieldPlaceholder}
-                    withAsterisk={formFieldMandatory}
-                    data={formFieldSelect}
-                    error={fieldError}
-                    register={register}
-                    setValue={setValue}
-                  />
-                );
-              default:
-                return null;
-            }
-          })}
-          <Group position="right" mt="md">
-            <ButtonComponent disabled={disabled}>{submit}</ButtonComponent>
-          </Group>
-        </form>
-      )}
-    </Box>
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {formFields.map((field) => {
+              const {
+                id: fieldId,
+                name: formFieldName,
+                label: formFieldLabel,
+                placeholder: formFieldPlaceholder,
+                required: formFieldMandatory,
+                type: formFieldType,
+                choices: formFieldSelect,
+              } = field;
+              const fieldError = !!errors[formFieldName];
+              switch (formFieldType) {
+                case 'input':
+                case 'phone':
+                case 'email':
+                  return (
+                    <TextInputComponent
+                      key={fieldId}
+                      name={formFieldName}
+                      label={formFieldLabel}
+                      placeholder={formFieldPlaceholder}
+                      type={formFieldType}
+                      withAsterisk={formFieldMandatory}
+                      error={fieldError}
+                      register={register}
+                    />
+                  );
+                case 'checkbox':
+                  return (
+                    <CheckboxComponent
+                      key={fieldId}
+                      name={formFieldName}
+                      label={formFieldLabel}
+                      withAsterisk={formFieldMandatory}
+                      error={fieldError}
+                      register={register}
+                    />
+                  );
+                case 'textarea':
+                  return (
+                    <TextareaComponent
+                      key={fieldId}
+                      name={formFieldName}
+                      label={formFieldLabel}
+                      placeholder={formFieldPlaceholder}
+                      withAsterisk={formFieldMandatory}
+                      error={fieldError}
+                      register={register}
+                    />
+                  );
+                case 'select':
+                  return (
+                    <SelectComponent
+                      key={fieldId}
+                      name={formFieldName}
+                      label={formFieldLabel}
+                      placeholder={formFieldPlaceholder}
+                      withAsterisk={formFieldMandatory}
+                      data={formFieldSelect}
+                      error={fieldError}
+                      register={register}
+                      setValue={setValue}
+                    />
+                  );
+                default:
+                  return null;
+              }
+            })}
+            <Group position="right" mt="md">
+              <ButtonComponent disabled={disabled}>{submit}</ButtonComponent>
+            </Group>
+          </form>
+        )}
+      </Box>
+    </Container>
   );
 }
 

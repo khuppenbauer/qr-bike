@@ -63,30 +63,28 @@ function TextImageRightComponent({ block }: BlockProps) {
   const contentStyle = image ? { maxWidth: rem(480) } : {};
 
   return (
-    <div>
-      <Container>
-        <div className={classes.inner}>
-          <div className={classes.content} style={contentStyle}>
-            {title && <Title className={classes.title}>{title}</Title>}
-            {text && <Text color="dimmed" mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
-            {links && (
-              <Group mt={30}>
-                {links.map((link) => (
-                  <Button
-                    key={link.id}
-                    link={link}
-                    size="md"
-                    variant="filled"
-                    className={classes.control}
-                  />
-                ))}
-              </Group>
-            )}
-          </div>
-          {image && <Image src={imgSrc} className={classes.image} />}
+    <Container>
+      <div className={classes.inner}>
+        <div className={classes.content} style={contentStyle}>
+          {title && <Title className={classes.title}>{title}</Title>}
+          {text && <Text color="dimmed" mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
+          {links && (
+            <Group mt={30}>
+              {links.map((link) => (
+                <Button
+                  key={link.id}
+                  link={link}
+                  size="md"
+                  variant="filled"
+                  className={classes.control}
+                />
+              ))}
+            </Group>
+          )}
         </div>
-      </Container>
-    </div>
+        {image && <Image src={imgSrc} className={classes.image} />}
+      </div>
+    </Container>
   );
 }
 
