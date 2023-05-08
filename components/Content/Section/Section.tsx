@@ -6,6 +6,7 @@ import HeroTextCenterComponent from '../Hero/HeroTextCenter';
 import HeroTextLeftComponent from '../Hero/HeroTextLeft';
 import TextImageLeftComponent from '../Text/TextImageLeft';
 import TextImageRightComponent from '../Text/TextImageRight';
+import TextLeftComponent from '../Text/TextLeft';
 
 const components: { [index: string]: any } = {
   hero_text_left: HeroTextLeftComponent,
@@ -14,6 +15,7 @@ const components: { [index: string]: any } = {
   hero_text_center_image: HeroImageTextCenterComponent,
   text_image_left: TextImageLeftComponent,
   text_image_right: TextImageRightComponent,
+  text_text_left: TextLeftComponent,
 };
 
 function SectionsComponent({ block }: any) {
