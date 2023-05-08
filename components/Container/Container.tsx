@@ -6,7 +6,7 @@ interface ContainerProps {
 }
 
 function ContainerComponent({ children }: ContainerProps) {
-  return <Container my={20}>{children}</Container>;
+  return <Container mt={20}>{children}</Container>;
 }
 
 export default ContainerComponent;

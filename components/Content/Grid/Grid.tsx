@@ -62,6 +62,7 @@ function GridsComponent({ block }: any) {
   const links = parse(block.links);
   const elements = parse(block.elements);
   const cols = elements.length <= 3 ? elements.length : 3;
+  const hasHeader = subtitle || title || text || links;
   return (
     <Container size="lg" py="xl">
       {subtitle && (
@@ -85,7 +86,7 @@ function GridsComponent({ block }: any) {
           dangerouslySetInnerHTML={{ __html: text }}
         />
       )}
-      {links && (
+      {links.length > 0 && (
         <div className={classes.controls}>
           {links.map((link) => (
             <Button
@@ -98,7 +99,7 @@ function GridsComponent({ block }: any) {
           ))}
         </div>
       )}
-      <SimpleGrid cols={cols} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
+      <SimpleGrid cols={cols} spacing="xl" mt={`${hasHeader} ? 50 : 0`} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
         {elements.map((element) => {
           if (!components[type]) {
             return null;

@@ -16,8 +16,6 @@ const useStyles = createStyles((theme) => ({
   inner: {
     display: 'flex',
     justifyContent: 'space-between',
-    paddingTop: `calc(${theme.spacing.xl} * 4)`,
-    paddingBottom: `calc(${theme.spacing.xl} * 4)`,
   },
 
   content: {
@@ -63,11 +61,11 @@ function TextImageRightComponent({ block }: BlockProps) {
   const contentStyle = image ? { maxWidth: rem(480) } : {};
 
   return (
-    <Container>
+    <Container py="xl">
       <div className={classes.inner}>
         <div className={classes.content} style={contentStyle}>
           {title && <Title className={classes.title}>{title}</Title>}
-          {text && <Text color="dimmed" mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
+          {text && <Text mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
           {links && (
             <Group mt={30}>
               {links.map((link) => (
