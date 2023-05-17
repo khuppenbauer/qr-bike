@@ -89,7 +89,7 @@ function FormComponent({ block, slug }: FormProps) {
       });
   };
   return (
-    <Container mt={20}>
+    <Container>
       <Box sx={{ maxWidth: 300 }}>
         {errorMessage && (
           <>

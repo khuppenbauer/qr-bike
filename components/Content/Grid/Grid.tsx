@@ -99,7 +99,12 @@ function GridsComponent({ block }: any) {
           ))}
         </div>
       )}
-      <SimpleGrid cols={cols} spacing="xl" mt={`${hasHeader} ? 50 : 0`} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
+      <SimpleGrid
+        cols={cols}
+        spacing="xl"
+        mt={`${hasHeader} ? 50 : 0`}
+        breakpoints={[{ maxWidth: 'md', cols: 1 }]}
+      >
         {elements.map((element) => {
           if (!components[type]) {
             return null;

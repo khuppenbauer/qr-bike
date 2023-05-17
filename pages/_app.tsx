@@ -8,11 +8,19 @@ const {
   publicRuntimeConfig: { prefix },
 } = getConfig();
 
-export default function App(props: AppProps & { theme: any }) {
-  const { Component, pageProps, theme } = props;
+export default function App(props: AppProps & { customTheme: any }) {
+  const { Component, pageProps, customTheme } = props;
+  const mantineTheme = {
+    ...customTheme,
+    globalStyles: (theme: any) => ({
+      a: {
+        color: theme.colors[theme.primaryColor][9],
+      },
+    }),
+  };
   return (
     <SettingsProvider>
-      <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
+      <MantineProvider theme={mantineTheme} withGlobalStyles withNormalizeCSS>
         <Component {...pageProps} />
       </MantineProvider>
     </SettingsProvider>
@@ -27,6 +35,6 @@ App.getInitialProps = async (appContext: AppContext) => {
   });
   return {
     ...appProps,
-    theme: data,
+    customTheme: data,
   };
 };

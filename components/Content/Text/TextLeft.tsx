@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  createStyles,
-  Container,
-  Title,
-  Group,
-  Text,
-  rem,
-} from '@mantine/core';
+import { createStyles, Container, Title, Group, Text, rem } from '@mantine/core';
 import Button from '../Link/Button';
 import ItemType from '../../../interfaces/item';
 
@@ -51,11 +44,11 @@ function TextLeftComponent({ block }: BlockProps) {
   const { classes } = useStyles();
 
   return (
-    <Container py="xl">
+    <Container>
       <div className={classes.inner}>
         <div className={classes.content}>
           {title && <Title className={classes.title}>{title}</Title>}
-          {text && <Text mt="md" dangerouslySetInnerHTML={{ __html: text }} />}
+          {text && <Text dangerouslySetInnerHTML={{ __html: text }} />}
           {links && (
             <Group mt={30}>
               {links.map((link) => (
