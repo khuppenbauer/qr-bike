@@ -14,7 +14,7 @@ function ScriptsComponent() {
           async
           defer
           data-website-id={`${umami}`}
-          src={`${umamiSrc}/umami.js`}
+          src={`${umamiSrc}`}
         />
       )}
     </Head>
